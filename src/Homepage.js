@@ -2,11 +2,12 @@ import axios from 'axios';
 import react, { useContext, useEffect } from 'react';
 import Navbar from './Components/Navbar';
 import PageSwitch from './Components/PageSwitch';
+import Rides from './Components/Rides';
 import { FilterContext } from './Contexts/GlobalState';
 
 const Homepage = () => {
 
-    const {state, city, user} = useContext(FilterContext);
+    const {state, city, user, rides, setRides} = useContext(FilterContext);
 
     const fetchRidesData = async() => {
         try{
@@ -14,6 +15,7 @@ const Homepage = () => {
                 "https://assessment.api.vweb.app/rides"
             );
             console.log(data);
+            setRides(data);
         }catch(error){
             console.log(error);
         }
@@ -27,6 +29,7 @@ const Homepage = () => {
         <>
             <Navbar/>
             <PageSwitch/>
+            <Rides/>
         </>
     );
 }

@@ -1,0 +1,44 @@
+.ride_card{
+    display: flex;
+    color : white;
+    background-color: #171717;
+    margin-left : 3.14%;
+    margin-right : 3.14%;
+    /* justify-content: space-between; */
+    align-items: center;
+    padding : 22px;
+}
+
+.ride_image{
+    width: 296px;
+    height : 148px;
+    border-radius: 5px;
+}
+
+
+.ride_detail > p{
+    margin : 8px;
+    font-size : 18px;
+    font-style: normal;
+}
+
+.ride_detail{
+    text-align: left;
+    margin-left : 44px;
+    color : #CFCFCF;
+    flex : 1;
+}
+.ride_location{
+    margin-left : auto;
+    display: flex;
+    /* align-items: top; */
+}
+
+.ride_location > small{
+    margin-left : 15px;
+    background: rgba(0, 0, 0, 0.56);
+    padding : 4px 10px;
+    border-radius: 16px;
+    position: relative;
+    top : 0;
+}
