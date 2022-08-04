@@ -8,6 +8,7 @@ import { FilterContext } from './Contexts/GlobalState';
 const Homepage = () => {
 
     const {state, city, user, rides, setRides} = useContext(FilterContext);
+    var _key = 0;
 
     const fetchRidesData = async() => {
         try{
@@ -29,7 +30,18 @@ const Homepage = () => {
         <>
             <Navbar/>
             <PageSwitch/>
-            <Rides/>
+            {rides && rides.map(ride => (
+                <Rides 
+                    id = {ride.id} 
+                    origin_station_code = {ride.origin_station_code} 
+                    station_path = {ride.station_path} 
+                    date = {ride.date} 
+                    image_src = {ride.map_url}
+                    key = {_key++}
+                    cityName = {ride.city}
+                    stateName = {ride.state}
+                />
+            ))}
         </>
     );
 }
