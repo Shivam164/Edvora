@@ -1,11 +1,12 @@
 import axios from 'axios';
 import react, { useContext, useEffect } from 'react';
 import Navbar from './Components/Navbar';
+import PageSwitch from './Components/PageSwitch';
 import { FilterContext } from './Contexts/GlobalState';
 
 const Homepage = () => {
 
-    const {state, city} = useContext(FilterContext);
+    const {state, city, user} = useContext(FilterContext);
 
     const fetchRidesData = async() => {
         try{
@@ -22,14 +23,10 @@ const Homepage = () => {
         fetchRidesData();
     },[]);
 
-    // useEffect(() => {
-
-    // },[state, city])
-
-
     return (
         <>
             <Navbar/>
+            <PageSwitch/>
         </>
     );
 }
