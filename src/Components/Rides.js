@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { FilterContext } from "../Contexts/GlobalState";
 import '../Styles/Rides.css';
 
-const Rides = ({id, origin_station_code, station_path, date, image_src, cityName, stateName}) => {
+const Rides = ({id, origin_station_code, station_path, date, image_src, cityName, stateName, distance}) => {
 
     const {rides} = useContext(FilterContext);
 
@@ -15,7 +15,7 @@ const Rides = ({id, origin_station_code, station_path, date, image_src, cityName
                     <p>Origin Station : {origin_station_code}</p>
                     <p>station_path : {station_path}</p>
                     <p>Date : {date}</p>
-                    <p>Distance : 0</p>
+                    <p>Distance : {distance}</p>
                 </div>
             }
             {rides && 

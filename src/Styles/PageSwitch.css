@@ -39,6 +39,5 @@
 }
 
 .active{
-    color : #97F704;
-    font : bold;
+    border-bottom : 2px solid white !important;
 }
