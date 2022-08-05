@@ -12,7 +12,6 @@ const Navbar = () => {
             const { data } = await axios.get(
                 "https://assessment.api.vweb.app/user"
             );
-            console.log(data);
             setUser(data);
         }catch(error){
             console.log(error);

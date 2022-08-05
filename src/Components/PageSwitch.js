@@ -35,7 +35,6 @@ const PageSwitch = () => {
             </div>
 
             <div className='filters'>
-                {/* <h1>Filters</h1> */}
                 <Filter/>
             </div>
         </div>

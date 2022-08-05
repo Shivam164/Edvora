@@ -79,7 +79,6 @@ const Homepage = () => {
             const { data } = await axios.get(
                 "https://assessment.api.vweb.app/rides"
             );
-            console.log(data);
             setRides(data);
             let states = new Set();
             let cities = new Set();

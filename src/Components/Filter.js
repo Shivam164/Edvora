@@ -21,7 +21,6 @@ const Filter = () => {
                 _allCity.push(rides[ride].city);
             }
         }
-        console.log("here");
         setFilteredCity(_allCity);
     }, [state]);
 
@@ -68,7 +67,7 @@ const Filter = () => {
                         <option value = {city} key = {__key++} className="city" >{city}</option>
                     ))}
                 </select>}
-                {!filteredCity && <select onChange = {e => {setCity(e.target.value); console.log(e.target.value)}}>
+                {!filteredCity && <select onChange = {e => {setCity(e.target.value);}}>
                     {allCity && allCity.map(city => (
                         <option value = {city} key = {__key++} className="city" >{city}</option>
                     ))}
