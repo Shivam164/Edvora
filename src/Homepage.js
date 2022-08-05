@@ -23,7 +23,12 @@ const Homepage = () => {
 
      // Nearest rides
      const nearestRides = () => {
-        var _rides = rides;
+        var _rides = [];
+
+        // copying rides in _rides
+        for(let ride = 0;ride < rides.length;ride++){
+            _rides.push(rides[ride]);
+        }
 
         _rides.sort(function(x, y){
             var distance1 = calculateDistance(x.station_path, user.station_code);
@@ -44,6 +49,7 @@ const Homepage = () => {
                 _rides.push(rides[ride]);
             }
         }
+        console.log(rides);
         return _rides;
      }
 
