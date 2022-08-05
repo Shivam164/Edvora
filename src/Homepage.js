@@ -7,7 +7,7 @@ import { FilterContext } from './Contexts/GlobalState';
 
 const Homepage = () => {
 
-    const {state, city, user, rides, setRides, nearest, upcoming, past} = useContext(FilterContext);
+    const {setAllState, setAllCity, user, rides, setRides, nearest, upcoming, past} = useContext(FilterContext);
     
     // key is to give a key to each card while mapping through rides
     var _key = 0;
@@ -49,7 +49,6 @@ const Homepage = () => {
                 _rides.push(rides[ride]);
             }
         }
-        console.log(rides);
         return _rides;
      }
 
@@ -71,6 +70,23 @@ const Homepage = () => {
             );
             console.log(data);
             setRides(data);
+            let states = new Set();
+            let cities = new Set();
+            for(let ride = 0;ride < data.length;ride++){
+                states.add(data[ride].state);
+                cities.add(data[ride].city);
+            }
+
+            var _states = [];
+            var _cities = [];
+            for(let state of states) { _states.push(state) };
+            for(let city of cities) { _cities.push(city) };
+
+            setAllState(_states);
+            setAllCity(_cities);
+
+            console.log(cities);
+
         }catch(error){
             console.log(error);
         }

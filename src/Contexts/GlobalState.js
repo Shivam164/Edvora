@@ -11,9 +11,11 @@ export const FilterContextProvider = (props) => {
       const [nearest, setNearest] = useState(true);
       const [upcoming, setUpcoming] = useState(false);
       const [past, setPast] = useState(false);
+      const [allState, setAllState] = useState(null);
+      const [allCity, setAllCity] = useState(null);
 
       return(
-          <FilterContext.Provider value = {{state, setState, city, setCity, user, setUser, rides, setRides, nearest, upcoming, past, setNearest, setUpcoming, setPast}}>
+          <FilterContext.Provider value = {{state, setState, city, setCity, user, setUser, rides, setRides, nearest, upcoming, past, setNearest, setUpcoming, setPast, allState, setAllState, allCity, setAllCity}}>
               {props.children}
           </FilterContext.Provider>
       )
