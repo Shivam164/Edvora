@@ -8,7 +8,7 @@ const Filter = () => {
     const {rides, allState, allCity, state, setCity, setState} = useContext(FilterContext);
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
-    const [filteredCity, setFilteredCity] = useState(allCity);
+    const [filteredCity, setFilteredCity] = useState(null);
 
     useEffect(() => {
         const _allCity = [];
@@ -58,13 +58,18 @@ const Filter = () => {
                 'aria-labelledby': 'basic-button',
                 }}
             >
-                <select onChange = {e => setState(e.target.value)}>
+                <select onChange = {e => {setState(e.target.value); setCity("")}}>
                     {allState && allState.map(state => (
                         <option value = {state} key = {state} className="state">{state}</option>
                     ))}
                 </select>
                 {filteredCity && <select onChange = {e => setCity(e.target.value)}>
                     {filteredCity.map(city => (
+                        <option value = {city} key = {__key++} className="city" >{city}</option>
+                    ))}
+                </select>}
+                {!filteredCity && <select onChange = {e => {setCity(e.target.value); console.log(e.target.value)}}>
+                    {allCity && allCity.map(city => (
                         <option value = {city} key = {__key++} className="city" >{city}</option>
                     ))}
                 </select>}

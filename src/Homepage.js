@@ -7,7 +7,12 @@ import { FilterContext } from './Contexts/GlobalState';
 
 const Homepage = () => {
 
-    const {setAllState, setAllCity, user, rides, setRides, nearest, upcoming, past} = useContext(FilterContext);
+    const {state, city, setAllState, setAllCity, user, rides, setRides, nearest, upcoming, past} = useContext(FilterContext);
+
+    const [nearRides, setNearRides] = useState(null);
+    const [pastRide, setPastRide] = useState(null);
+    const [upcomeRides, setUpcomeRides] = useState(null);
+
     
     // key is to give a key to each card while mapping through rides
     var _key = 0;
@@ -27,6 +32,8 @@ const Homepage = () => {
 
         // copying rides in _rides
         for(let ride = 0;ride < rides.length;ride++){
+            if(city != "" && rides[ride].city != city)continue;
+            if(state != "" && rides[ride].state != state)continue;
             _rides.push(rides[ride]);
         }
 
@@ -38,29 +45,33 @@ const Homepage = () => {
             return 0;
         });
 
-        return _rides;
+        setNearRides(_rides);
      }
 
      // Seperating past rides
      const pastRides = () => {
         var _rides = [];
         for(let ride = 0; ride < rides.length; ride++){
+            if(city != "" && rides[ride].city != city)continue;
+            if(state != "" && rides[ride].state != state)continue;
             if(Date.now() > Date.parse(rides[ride].date)){
                 _rides.push(rides[ride]);
             }
         }
-        return _rides;
+        setPastRide(_rides);
      }
 
      // Seperating upcoming rides
      const upcomingRides = () => {
         const _rides = [];
         for(let ride = 0; ride < rides.length; ride++){
+            if(city != "" && rides[ride].city != city)continue;
+            if(state != "" && rides[ride].state != state)continue;
             if(Date.now() < Date.parse(rides[ride].date)){
                 _rides.push(rides[ride]);
             }
         }
-        return _rides;
+        setUpcomeRides(_rides);
      }
 
     const fetchRidesData = async() => {
@@ -84,9 +95,6 @@ const Homepage = () => {
 
             setAllState(_states);
             setAllCity(_cities);
-
-            console.log(cities);
-
         }catch(error){
             console.log(error);
         }
@@ -96,11 +104,20 @@ const Homepage = () => {
         fetchRidesData();
     },[]);
 
+    useEffect(() => {
+        if(rides){
+            nearestRides();
+            pastRides();
+            upcomingRides();
+        }
+        
+    },[rides,city, state]);
+
     return (
         <>
             <Navbar/>
             <PageSwitch/>
-            {rides && past && pastRides().map(ride => (
+            {pastRide && past && pastRide.map(ride => (
                 <Rides 
                     id = {ride.id} 
                     origin_station_code = {ride.origin_station_code} 
@@ -113,7 +130,7 @@ const Homepage = () => {
                     distance = {calculateDistance(ride.station_path, user.station_code)}
                 />
             ))}
-            {rides && upcoming && upcomingRides().map(ride => (
+            {upcomeRides && upcoming && upcomeRides.map(ride => (
                 <Rides 
                     id = {ride.id} 
                     origin_station_code = {ride.origin_station_code} 
@@ -126,7 +143,7 @@ const Homepage = () => {
                     distance = {calculateDistance(ride.station_path, user.station_code)}
                 />
             ))}
-            {rides && nearest && nearestRides().map(ride => (
+            {nearRides && nearest && nearRides.map(ride => (
                 <Rides 
                     id = {ride.id} 
                     origin_station_code = {ride.origin_station_code} 
